@@ -56,10 +56,25 @@ namespace _1TlProjectAspNetCore.Web.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-        
+        [HttpGet]
         public IActionResult Update(int id) 
         {
-            return View();
+            var product = _context.Products.Find(id);
+
+            return View(product);
+        }
+        [HttpPost]
+        public IActionResult Update(Product updateProduct,int productId,string type)
+        {
+            updateProduct.Id= productId;
+            _context.Products.Update(updateProduct);
+            _context.SaveChanges();
+
+
+            TempData["status"] = "Ürün başarıyla güncellendi";
+
+
+            return RedirectToAction("index");
         }
         [HttpGet] //sayfayı göstermek için yapar
         public IActionResult Add()
@@ -81,8 +96,10 @@ namespace _1TlProjectAspNetCore.Web.Controllers
             //var color = HttpContext.Request.Form["Color"].ToString();
 
             //Product newProduct=new Product() { Name=Name,Price=Price,Stock=Stock,Color=Color};
+
             _context.Products.Add(newproduct);
             _context.SaveChanges();
+            TempData["status"] = "Ürün başarıyla eklendi";
             return RedirectToAction("index");
         }
         //[HttpGet]
