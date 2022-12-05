@@ -1,0 +1,43 @@
+﻿@using _1TlProjectAspNetCore.Web.Controllers
+
+
+@{
+    ViewData["Title"] = "Index";
+    var message = "Merhaba";
+    var datetime = DateTime.Now.ToShortDateString();
+    var alert = "bu bir uyari mesajı";
+}
+
+
+<p>@ViewBag.person.Id-@ViewBag.person.Name-@ViewBag.person.Age-@ViewBag.person.Price</p>
+<div>bugünün tarihi: @datetime</div>
+@model List<Products>;
+@foreach (var item in Model)
+{
+    <p>item.Id :@item.Id-item.name: @item.Name</p>
+}
+@if(DateTime.IsLeapYear(DateTime.Now.Year))
+{
+    <p>doğru</p>
+}
+else if(2==1)
+{
+    <p>1=1</p>
+}
+else
+{
+    @alert
+    <p>Yanlış</p>
+} 
+@for (var i=0;i<10;i++){
+    <p>@i</p>
+}
+
+@foreach (var item in Enumerable.Range(1,20).ToList())
+{
+    <p>@item</p>
+}
+<partial name="_MenuPartialView" />
+
+
+

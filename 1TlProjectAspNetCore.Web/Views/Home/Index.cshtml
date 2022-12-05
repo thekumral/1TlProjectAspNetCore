@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function(){
+            console.log("Sayfamıza hoşgeldin agam");
+        })
+    </script>
+}
+@section Css
+    {
+    <link href="~/css/example.css" rel="stylesheet" />
+
+    <style>
+        h1{
+            color:red;
+            background-color:blue;
+        }
+    </style>
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div>
+    <h2>Merhaba Css</h2>
+</div>
+<partial name="_MenuPartialView" />
+@await Html.PartialAsync("_MenuPartialView")
+@Html.Partial("_MenuPArtialView") @*Bu Senkron olandır ondan kullanmamak lazım 
+    Best Practics
+*@
