@@ -7,10 +7,10 @@ namespace _1TlProjectAspNetCore.Web.Models
     {
         private static List<Product> _products = new List<Product>()
         {
-            new() { Id = 1, Name = "kalem 1", Price = 100, Stock = 100,Color="Red",Width=300,Height=250 },
-            new () { Id = 2, Name = "kalem 2", Price = 200, Stock = 200,Color="Blue",Width=300,Height=250 },
-            new () { Id = 3, Name = "kalem 3", Price = 300, Stock = 300 ,Color="Green",Width=300,Height=250},
-            new() { Id = 4, Name = "kalem 4", Price = 400, Stock = 400,Color="black",Width=300,Height=250 }
+            new() { Id = 1, Name = "kalem 1", Price = 100, Stock = 100,Color="Red"},
+            new () { Id = 2, Name = "kalem 2", Price = 200, Stock = 200,Color="Blue",},
+            new () { Id = 3, Name = "kalem 3", Price = 300, Stock = 300 ,Color="Green",},
+            new() { Id = 4, Name = "kalem 4", Price = 400, Stock = 400,Color="black",}
 
         };
 

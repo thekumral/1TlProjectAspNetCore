@@ -13,14 +13,14 @@ namespace _1TlProjectAspNetCore.Web.Controllers
 
             _context = context;
             // any herhangi bi kayıt yoksa kayıt et çalış yani LINQ methodu
-            if (!_context.Products.Any())
-            {
-                _context.Products.Add(new Product() { Name = "Kalem 1", Price = 100, Stock = 100 ,Color="Red",Width=300,Height=250});
-                _context.Products.Add(new Product() { Name = "Kalem 2", Price = 200, Stock = 200, Color = "Blue", Width = 300, Height = 250 });
-                _context.Products.Add(new Product() { Name = "Kalem 3", Price = 200, Stock = 300, Color = "Green", Width = 300, Height = 250 });
+            //if (!_context.Products.Any())
+            //{
+            //    _context.Products.Add(new Product() { Name = "Kalem 1", Price = 100, Stock = 100 ,Color="Red"});
+            //    _context.Products.Add(new Product() { Name = "Kalem 2", Price = 200, Stock = 200, Color = "Blue"  });
+            //    _context.Products.Add(new Product() { Name = "Kalem 3", Price = 200, Stock = 300, Color = "Green" });
 
-                _context.SaveChanges(); // memory de çalışan verileri satır oluştur.
-            }
+            //    _context.SaveChanges(); // memory de çalışan verileri satır oluştur.
+            //}
             
 
 
@@ -39,7 +39,7 @@ namespace _1TlProjectAspNetCore.Web.Controllers
         {
             //tolist LINQ methodudur.
             var products = _context.Products.ToList();
-            var product = _context.Products.First();
+            //var product = _context.Products.First();
 
             //has value => değer var mı yokmu null mı true false
             //value => değeri almak için
@@ -48,22 +48,40 @@ namespace _1TlProjectAspNetCore.Web.Controllers
 
             return View(products);
         }
-        public IActionResult Add()
-        {
-            return View();
-        }
-        public IActionResult Update(int id) 
-        {
-            return View();
-        }
         public IActionResult Remove(int id)
         {
             var product = _context.Products.Find(id);
 
             _context.Products.Remove(product);
             _context.SaveChanges();
-
             return RedirectToAction("Index");
+        }
+        
+        public IActionResult Update(int id) 
+        {
+            return View();
+        }
+        [HttpGet] //sayfayı göstermek için yapar
+        public IActionResult Add()
+        {
+            return View();
+        }
+        [HttpPost] //buton ile data kaydetme post SADECE GETLERİN SAYFASI olur
+            //request Head-body var post body den gelir bu daha güvenlikli
+            //get kısmı iste url yani request ın head ında gelir
+            //get kısmı iste url yani request ın head ında gelir
+        public IActionResult SaveProduct(string Name,decimal Price,int Stock,string Color)
+        {
+            //1. yöntem
+            var name = HttpContext.Request.Form["Name"].ToString();
+            var price = decimal.Parse( HttpContext.Request.Form["Price"]);
+            var stock = int.Parse( HttpContext.Request.Form["Stock"]);
+            var color = HttpContext.Request.Form["Color"].ToString();
+
+            Product newProduct=new Product() { Name=name,Price=price,Stock=stock,Color=color};
+            _context.Products.Add(newProduct);
+            _context.SaveChanges();
+            return RedirectToAction("index");
         }
 
     }
