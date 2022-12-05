@@ -66,23 +66,39 @@ namespace _1TlProjectAspNetCore.Web.Controllers
         {
             return View();
         }
-        [HttpPost] //buton ile data kaydetme post SADECE GETLERİN SAYFASI olur
-            //request Head-body var post body den gelir bu daha güvenlikli
-            //get kısmı iste url yani request ın head ında gelir
-            //get kısmı iste url yani request ın head ında gelir
-        public IActionResult SaveProduct(string Name,decimal Price,int Stock,string Color)
+        //buton ile data kaydetme post SADECE GETLERİN SAYFASI olur
+        //request Head-body var post body den gelir bu daha güvenlikli
+        //get kısmı iste url yani request ın head ında gelir
+        //get kısmı iste url yani request ın head ında gelir
+        // buna gerek kalmadı=>/*string Name,decimal Price,int Stock,string Color*/ bu new product yerindeydi
+        [HttpPost]
+        public IActionResult Add(Product newproduct)
         {
             //1. yöntem
-            var name = HttpContext.Request.Form["Name"].ToString();
-            var price = decimal.Parse( HttpContext.Request.Form["Price"]);
-            var stock = int.Parse( HttpContext.Request.Form["Stock"]);
-            var color = HttpContext.Request.Form["Color"].ToString();
+            //var name = HttpContext.Request.Form["Name"].ToString();
+            //var price = decimal.Parse( HttpContext.Request.Form["Price"]);
+            //var stock = int.Parse( HttpContext.Request.Form["Stock"]);
+            //var color = HttpContext.Request.Form["Color"].ToString();
 
-            Product newProduct=new Product() { Name=name,Price=price,Stock=stock,Color=color};
-            _context.Products.Add(newProduct);
+            //Product newProduct=new Product() { Name=Name,Price=Price,Stock=Stock,Color=Color};
+            _context.Products.Add(newproduct);
             _context.SaveChanges();
             return RedirectToAction("index");
         }
+        //[HttpGet]
+        //public IActionResult SaveProduct(Product newproduct)
+        //{
+        //    //1. yöntem
+        //    //var name = HttpContext.Request.Form["Name"].ToString();
+        //    //var price = decimal.Parse( HttpContext.Request.Form["Price"]);
+        //    //var stock = int.Parse( HttpContext.Request.Form["Stock"]);
+        //    //var color = HttpContext.Request.Form["Color"].ToString();
+
+        //    //Product newProduct=new Product() { Name=Name,Price=Price,Stock=Stock,Color=Color};
+        //    _context.Products.Add(newproduct);
+        //    _context.SaveChanges();
+        //    return View();
+        //}
 
     }
 }
