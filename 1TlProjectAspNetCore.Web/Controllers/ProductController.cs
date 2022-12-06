@@ -1,16 +1,16 @@
-﻿using _1TlProjectAspNetCore.Web.Models;
+﻿using _1TlProjectAspNetCore.Web.Helper;
+using _1TlProjectAspNetCore.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _1TlProjectAspNetCore.Web.Controllers
 {
     public class ProductController : Controller
-    {
+    { 
         private AppDbContext _context;
         private readonly ProductRepository _productRepository;
-        public ProductController(AppDbContext context)
+        public ProductController(AppDbContext context,IHelper helper)
         {
             _productRepository = new ProductRepository();
-
             _context = context;
             // any herhangi bi kayıt yoksa kayıt et çalış yani LINQ methodu
             //if (!_context.Products.Any())
@@ -37,7 +37,7 @@ namespace _1TlProjectAspNetCore.Web.Controllers
         //ctor constructure kısaltma
         public IActionResult Index()
         {
-            //tolist LINQ methodudur.
+         
             var products = _context.Products.ToList();
             //var product = _context.Products.First();
 
